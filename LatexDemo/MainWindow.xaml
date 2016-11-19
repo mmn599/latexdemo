@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LatexDemo"
         mc:Ignorable="d"
+
         Title="MainWindow" Height="350" Width="525">
+
     <Grid>
-        
+        <InkCanvas x:Name="ink" Height="100" Width="100" Background="Transparent"/>
+        <Button x:Name="btnPredict" Content="Predict" HorizontalAlignment="Left" Margin="154,49,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="154,267,0,0" TextWrapping="Wrap" Text="mmmm" VerticalAlignment="Top" Width="120"/>
     </Grid>
+
 </Window>
