@@ -6,6 +6,10 @@
 *.user
 *.userosscache
 *.sln.docstates
+LatexDemo/mylatex.tex
+LatexDemo/output.aux
+LatexDemo/output.pdf
+LatexDemo/output.png
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
