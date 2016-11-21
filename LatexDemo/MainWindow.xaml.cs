@@ -19,6 +19,7 @@ namespace LatexDemo
             CenterWindowOnScreen();
             btnPredict.Click += btnPredictClick;
             btnReset.Click += btnResetClick;
+            btnSave.Click += btnSaveClick;
         }
 
         private string runPredictScript(string scriptfn, string clffn, string pythonfn, string imagefn)
@@ -76,7 +77,7 @@ namespace LatexDemo
         {
             Rect bounds = VisualTreeHelper.GetDescendantBounds(ink);
             double dpi = 96d;
-            var rtb = new RenderTargetBitmap((int)bounds.Width, (int)bounds.Height, dpi, dpi, System.Windows.Media.PixelFormats.Default);
+            var rtb = new RenderTargetBitmap((int)bounds.Width, (int)bounds.Height, dpi, dpi, PixelFormats.Default);
             var dv = new DrawingVisual();
             using (DrawingContext dc = dv.RenderOpen())
             {
@@ -103,6 +104,18 @@ namespace LatexDemo
             ink.Visibility = Visibility.Visible;
             btnReset.Visibility = Visibility.Collapsed;
             btnPredict.Visibility = Visibility.Visible;
+        }
+
+        private int COUNT = 0;
+
+        private void btnSaveClick(object sender, RoutedEventArgs e)
+        {
+            string symbol = "2";
+            string dir = @"C:\Users\mmnor\Projects\autolatex\data\MYDIGITS\";
+            string fileName = dir + COUNT + "_" + symbol + ".png";
+            saveCanvas(fileName);
+            COUNT += 1;
+            ink.Strokes.Clear();
         }
 
         private void btnPredictClick(object sender, RoutedEventArgs e)

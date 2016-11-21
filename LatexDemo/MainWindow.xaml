@@ -10,10 +10,12 @@
         Title="LaTeX Magic">
 
     <Grid>
-        <InkCanvas x:Name="ink" Background="#e1e6ef" HorizontalAlignment="Center" Margin="0,104,0,592.5" Width="860"/>
-        <Button x:Name="btnPredict" Content="Predict" HorizontalAlignment="Center" Margin="625,593,582,0" VerticalAlignment="Top" Width="338" Height="103"/>
+        <InkCanvas x:Name="ink" HorizontalAlignment="Center" Margin="0,104,0,592.5" Width="860"/>
+        <Line Stroke="Blue" X1="316" Y1="380" X2="1177" Y2="380" />
         <Button x:Name="btnReset" Visibility="Collapsed" Content="One more time!" HorizontalAlignment="Center" Margin="625,593,582,0" VerticalAlignment="Top" Width="338" Height="103"/>
         <Image x:Name="imageLatex" HorizontalAlignment="Center" Margin="0,104,0,592.5" Visibility="Collapsed"></Image>
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Center" Margin="0,427,0,0" VerticalAlignment="Top" Width="338" Height="103"/>
+        <Button x:Name="btnPredict" Content="Predict" HorizontalAlignment="Center" Margin="0,593,0,0" VerticalAlignment="Top" Width="338" Height="103"/>
     </Grid>
 
 </Window>
