@@ -46,11 +46,9 @@ namespace LatexDemo
         {
             File.WriteAllText(latexfn, text);
             var p = new Process();
-            var sb = new StringBuilder();
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
-            p.OutputDataReceived += (sender, args) => sb.AppendLine(args.Data);
-            p.ErrorDataReceived += (sender, args) => sb.AppendLine(args.Data);
+            p.ErrorDataReceived += (sender, args) => Debug.Write(args.Data + "\n");
             p.StartInfo.FileName = batchfn;
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.CreateNoWindow = true;
@@ -66,28 +64,34 @@ namespace LatexDemo
         {
             Rect bounds = VisualTreeHelper.GetDescendantBounds(ink);
             double dpi = 96d;
-            RenderTargetBitmap rtb = new RenderTargetBitmap((int)bounds.Width, (int)bounds.Height, dpi, dpi, System.Windows.Media.PixelFormats.Default);
-            DrawingVisual dv = new DrawingVisual();
+            var rtb = new RenderTargetBitmap((int)bounds.Width, (int)bounds.Height, dpi, dpi, System.Windows.Media.PixelFormats.Default);
+            var dv = new DrawingVisual();
             using (DrawingContext dc = dv.RenderOpen())
             {
-                VisualBrush vb = new VisualBrush(ink);
+                var vb = new VisualBrush(ink);
                 dc.DrawRectangle(vb, null, new Rect(new Point(), bounds.Size));
             }
             rtb.Render(dv);
-            BitmapEncoder pngEncoder = new PngBitmapEncoder();
+            var pngEncoder = new PngBitmapEncoder();
             pngEncoder.Frames.Add(BitmapFrame.Create(rtb));
-            using (MemoryStream ms = new System.IO.MemoryStream())
+            using (var ms = new MemoryStream())
             {
                 pngEncoder.Save(ms);
                 File.WriteAllBytes(fullFileName, ms.ToArray());
             }
         }
 
+        private static string LATEX_PRE = "\\documentclass[preview,border=12pt]{standalone}\n\\usepackage{amsmath}\n\\usepackage{tikz}\n\\begin{document}\n$";
+        private static string LATEX_POST = "$\n\\end{document}";
+
         private void btnPredictClick(object sender, RoutedEventArgs e)
         {
+            ink.Visibility = Visibility.Hidden;
             saveCanvas(DOODLE_FN);
             string latex = runPredictScript(PREDICTSCRIPT_FN, CLF_FN, PYTHON_FN, DOODLE_FN);
-            displayLatex(LATEX_FN, BATCH_FN, LATEXIMAGE_FN, latex);
+            string latexDocument = LATEX_PRE + latex + LATEX_POST;
+            displayLatex(LATEX_FN, BATCH_FN, LATEXIMAGE_FN, latexDocument);
+            imageLatex.Visibility = Visibility.Visible;
         }
     }
 }
