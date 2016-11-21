@@ -16,7 +16,9 @@ namespace LatexDemo
         public MainWindow()
         {
             InitializeComponent();
+            CenterWindowOnScreen();
             btnPredict.Click += btnPredictClick;
+            btnReset.Click += btnResetClick;
         }
 
         private string runPredictScript(string scriptfn, string clffn, string pythonfn, string imagefn)
@@ -60,6 +62,16 @@ namespace LatexDemo
             imageLatex.Source = latexOutputImage;
         }
 
+        private void CenterWindowOnScreen()
+        {
+            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+            double windowWidth = this.Width;
+            double windowHeight = this.Height;
+            this.Left = (screenWidth / 2) - (windowWidth / 2);
+            this.Top = (screenHeight / 2) - (windowHeight / 2);
+        }
+
         private void saveCanvas(string fullFileName)
         {
             Rect bounds = VisualTreeHelper.GetDescendantBounds(ink);
@@ -84,14 +96,25 @@ namespace LatexDemo
         private static string LATEX_PRE = "\\documentclass[preview,border=12pt]{standalone}\n\\usepackage{amsmath}\n\\usepackage{tikz}\n\\begin{document}\n$";
         private static string LATEX_POST = "$\n\\end{document}";
 
+        private void btnResetClick(object sender, RoutedEventArgs e)
+        {
+            ink.Strokes.Clear();
+            imageLatex.Visibility = Visibility.Collapsed;
+            ink.Visibility = Visibility.Visible;
+            btnReset.Visibility = Visibility.Collapsed;
+            btnPredict.Visibility = Visibility.Visible;
+        }
+
         private void btnPredictClick(object sender, RoutedEventArgs e)
         {
-            ink.Visibility = Visibility.Hidden;
+            ink.Visibility = Visibility.Collapsed;
+            btnPredict.Visibility = Visibility.Collapsed;
             saveCanvas(DOODLE_FN);
             string latex = runPredictScript(PREDICTSCRIPT_FN, CLF_FN, PYTHON_FN, DOODLE_FN);
             string latexDocument = LATEX_PRE + latex + LATEX_POST;
             displayLatex(LATEX_FN, BATCH_FN, LATEXIMAGE_FN, latexDocument);
             imageLatex.Visibility = Visibility.Visible;
+            btnReset.Visibility = Visibility.Visible;
         }
     }
 }

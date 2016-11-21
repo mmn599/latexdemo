@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LatexDemo"
         mc:Ignorable="d"
+        Height="1000"
+        Width="1500"
         Title="LaTeX Magic">
 
     <Grid>
-        <InkCanvas x:Name="ink" Height="100" Background="#e1e6ef" HorizontalAlignment="Center" Margin="0,84,0,323.5"/>
-        <Button x:Name="btnPredict" Content="Predict" HorizontalAlignment="Center" Margin="332,284,331,0" VerticalAlignment="Top" Width="100"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Center" Height="23" Margin="332,410,331,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
-        <Image x:Name="imageLatex" HorizontalAlignment="Center" Margin="0,84,0,323.5" Visibility="Collapsed"></Image>
+        <InkCanvas x:Name="ink" Background="#e1e6ef" HorizontalAlignment="Center" Margin="0,104,0,592.5" Width="860"/>
+        <Button x:Name="btnPredict" Content="Predict" HorizontalAlignment="Center" Margin="625,593,582,0" VerticalAlignment="Top" Width="338" Height="103"/>
+        <Button x:Name="btnReset" Visibility="Collapsed" Content="One more time!" HorizontalAlignment="Center" Margin="625,593,582,0" VerticalAlignment="Top" Width="338" Height="103"/>
+        <Image x:Name="imageLatex" HorizontalAlignment="Center" Margin="0,104,0,592.5" Visibility="Collapsed"></Image>
     </Grid>
 
 </Window>
