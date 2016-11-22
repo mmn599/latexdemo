@@ -119,7 +119,7 @@ namespace LatexDemo
         private void btnSaveClick(object sender, RoutedEventArgs e)
         {
             string symbol = textBox.Text;
-            string dir = @"C:\Users\mmnor\Projects\autolatex\data\MYDATA\train\";
+            string dir = @"C:\Users\mmnor\Projects\autolatex\data\MYDATA\overall\";
             string fileName = dir + SAVE_COUNT + "_" + symbol + ".png";
             saveCanvas(fileName);
             SAVE_COUNT += 1;
