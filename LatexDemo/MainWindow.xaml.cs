@@ -32,10 +32,10 @@ namespace LatexDemo
             process.StartInfo.CreateNoWindow = true;
             process.Start();
             process.WaitForExit();
-            string latexoutput = process.StandardOutput.ReadToEnd();
+            string scriptoutput = process.StandardOutput.ReadToEnd();
             string erroroutput = process.StandardError.ReadToEnd();
             Debug.Write(erroroutput);
-            return latexoutput;
+            return scriptoutput;
         }
 
         private static string ROOT_DIR = "C:\\Users\\mmnor\\Projects\\LatexDemo\\LatexDemo\\";
@@ -108,8 +108,9 @@ namespace LatexDemo
         {
             ink.Strokes.Clear();
             imageLatex.Visibility = Visibility.Collapsed;
-            ink.Visibility = Visibility.Visible;
+            imageProcess.Visibility = Visibility.Collapsed;
             btnReset.Visibility = Visibility.Collapsed;
+            ink.Visibility = Visibility.Visible;
             btnPredict.Visibility = Visibility.Visible;
         }
 
@@ -131,12 +132,27 @@ namespace LatexDemo
             btnPredict.Visibility = Visibility.Collapsed;
             saveCanvas(DOODLE_FN);
             ink.Visibility = Visibility.Collapsed;
-            string latex = runPredictScript(PREDICTSCRIPT_FN, CLF_FN, FT_FN, PYTHON_FN, DOODLE_FN);
+
+            string scriptoutput = runPredictScript(PREDICTSCRIPT_FN, CLF_FN, FT_FN, PYTHON_FN, DOODLE_FN);
+            string latex = "default";
+            string symbolsImageFn = "default";
+            using (var reader = new StringReader(scriptoutput))
+            {
+                latex = reader.ReadLine();
+                symbolsImageFn = reader.ReadLine();
+            }
+
             textBox.Text = latex;
             string latexDocument = LATEX_PRE + latex + LATEX_POST;
             displayLatex(LATEX_FN, BATCH_FN, latexDocument);
+
+            var processedOutputImage = new BitmapImage(new Uri(symbolsImageFn, UriKind.Absolute));
+            imageProcess.Source = processedOutputImage;
+
+            imageProcess.Visibility = Visibility.Visible;
             imageLatex.Visibility = Visibility.Visible;
             btnReset.Visibility = Visibility.Visible;
+
             PREDICT_COUNT += 1;
         }
     }

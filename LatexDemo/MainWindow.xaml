@@ -9,14 +9,14 @@
         Width="1500"
         Title="LaTeX Magic">
 
-    <Grid>
+    <Grid Background="BurlyWood">
         <InkCanvas x:Name="ink" HorizontalAlignment="Center" Margin="0,104,0,592.5" Width="860"/>
-        <Line Stroke="Blue" X1="316" Y1="350" X2="1177" Y2="350" />
-        <Button x:Name="btnReset" Visibility="Collapsed" Content="One more time!" HorizontalAlignment="Center" Margin="625,593,582,0" VerticalAlignment="Top" Width="338" Height="103"/>
-        <Image x:Name="imageLatex" HorizontalAlignment="Center" Margin="0,104,0,592.5" Visibility="Collapsed"></Image>
-        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Center" Margin="0,427,0,0" VerticalAlignment="Top" Width="338" Height="103"/>
-        <Button x:Name="btnPredict" Content="Predict" HorizontalAlignment="Center" Margin="0,593,0,0" VerticalAlignment="Top" Width="338" Height="103"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="179,548,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
+        <Image x:Name="imageProcess" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,104,0,592.5" Width="860"/>
+        <Image x:Name="imageLatex" HorizontalAlignment="Center" Margin="0,463,0,233.5" Source="latex_default.png"></Image>
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Center" Margin="0,802,500,0" VerticalAlignment="Top" Width="338" Height="103"/>
+        <Button x:Name="btnPredict" Content="Predict" HorizontalAlignment="Center" Margin="500,802,0,0" VerticalAlignment="Top" Width="338" Height="103"/>
+        <Button x:Name="btnReset" Visibility="Collapsed" Content="One more time!" HorizontalAlignment="Center" Margin="500,802,0,0" VerticalAlignment="Top" Width="338" Height="103"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Center" Height="22" Margin="0,940,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
     </Grid>
 
 </Window>
