@@ -12,6 +12,11 @@ LatexDemo/output.pdf
 LatexDemo/output.png
 LatexDemo/doodle.png
 LatexDemo/*.png
+temp/*.png
+temp/*.tex
+temp/*.pdf
+temp/*.aux
+temp/*.log
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

@@ -14,8 +14,6 @@ namespace LatexDemo
     public partial class MainWindow : Window
     {
 
-        List<System.Windows.Controls.Image> SymbolImages = new List<System.Windows.Controls.Image>();
-
         public MainWindow()
         {
             InitializeComponent();
@@ -23,16 +21,6 @@ namespace LatexDemo
             btnPredict.Click += btnPredictClick;
             btnReset.Click += btnResetClick;
             btnSave.Click += btnSaveClick;
-            SymbolImages.Add(image1);
-            SymbolImages.Add(image2);
-            SymbolImages.Add(image3);
-            SymbolImages.Add(image4);
-            SymbolImages.Add(image5);
-            SymbolImages.Add(image6);
-            SymbolImages.Add(image7);
-            SymbolImages.Add(image8);
-            SymbolImages.Add(image9);
-            SymbolImages.Add(image10);
         }
 
         private string runPredictScript(string imagefn, int version, int predict_count)
@@ -53,25 +41,28 @@ namespace LatexDemo
         }
 
         private static string ROOT_DIR = "C:\\Users\\mmnor\\Projects\\LatexDemo\\LatexDemo\\";
-        private static string DOODLE_FN = ROOT_DIR + "doodle.png";
-        private static string LATEX_FN = ROOT_DIR + "mylatex.tex";
-        private static string BATCH_FN = ROOT_DIR + "batch.bat";
+        private static string TEMP_DIR = ROOT_DIR + "\\temp\\";
+        private static string DOODLE_FN = TEMP_DIR + "doodle.png";
+        private static string LATEX_FN = TEMP_DIR + "mylatex.tex";
+        private static string OUTPUTPDF_FN = TEMP_DIR + "output.pdf";
+        private static string BATCH_FN = TEMP_DIR + "batch.bat";
         private static string LATEXIMAGE_FN = ROOT_DIR + "output.png";
         private static string PREDICTSCRIPT_FN = "C:\\Users\\mmnor\\Projects\\autolatex\\predict.py";
         private static string PYTHON_FN = "C:\\Anaconda3\\python.exe";
         private static string PICTURE_FN = "C:\\Users\\mmnor\\Projects\\LatexDemo\\LatexDemo\\output";
 
-        private void displayLatex(string latexfn, string batchfn, string text)
+        private void displayLatex(string text)
         {
-            File.WriteAllText(latexfn, text);
+            File.WriteAllText(LATEX_FN, text);
             var p = new Process();
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
             string picturefn = PICTURE_FN + PREDICT_COUNT + ".png";
-            p.StartInfo.Arguments = picturefn;
             p.ErrorDataReceived += (sender, args) => Debug.Write(args.Data + "\n");
             p.OutputDataReceived += (sender, args) => Debug.Write(args.Data + "\n");
-            p.StartInfo.FileName = batchfn;
+            p.StartInfo.FileName = BATCH_FN;
+            string latexFnRemoved = LATEX_FN.Replace(".tex", "");
+            p.StartInfo.Arguments = picturefn + " " + latexFnRemoved + " " + OUTPUTPDF_FN;
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.CreateNoWindow = true;
             p.Start();
@@ -152,32 +143,33 @@ namespace LatexDemo
 
             string scriptoutput = runPredictScript(DOODLE_FN, 3, PREDICT_COUNT);
             string latex = "default";
-            string symbolsImageFn = "default";
+            string labelsImageFn = "default";
             int numSymbols = -1;
             var symbolImgFileNames = new List<string>();
             using (var reader = new StringReader(scriptoutput))
             {
                 latex = reader.ReadLine();
-                symbolsImageFn = reader.ReadLine();
+                labelsImageFn = reader.ReadLine();
                 numSymbols = Int32.Parse(reader.ReadLine());
                 for(int i = 0; i < numSymbols; i++)
                 {
                     string symbolImgFn = reader.ReadLine();
-                    symbolImgFileNames.Add(symbolsImageFn);
+                    symbolImgFileNames.Add(symbolImgFn);
                 }
             }
 
-            for(int i=0;i<(symbolsImageFn.Length) && i < 10; i++)
+            listSymbolImages.Items.Clear();
+            foreach(var symbolImgFileName in symbolImgFileNames)
             {
-                string fnImage = symbolImgFileNames[i];
-                var imageSymbol = new BitmapImage(new Uri(fnImage, UriKind.Absolute));
-                SymbolImages[i].Source = imageSymbol;
+                var magicImage = new MagicImage();
+                magicImage.Path = symbolImgFileName;
+                listSymbolImages.Items.Add(magicImage);
             }
 
             string latexDocument = LATEX_PRE + latex + LATEX_POST;
-            displayLatex(LATEX_FN, BATCH_FN, latexDocument);
+            displayLatex(latexDocument);
 
-            var processedOutputImage = new BitmapImage(new Uri(symbolsImageFn, UriKind.Absolute));
+            var processedOutputImage = new BitmapImage(new Uri(labelsImageFn, UriKind.Absolute));
             imageProcess.Source = processedOutputImage;
 
             //imageProcess.Visibility = Visibility.Visible;
@@ -187,4 +179,9 @@ namespace LatexDemo
             PREDICT_COUNT += 1;
         }
     }
+}
+
+public class MagicImage
+{
+    public string Path { get; set; }
 }
