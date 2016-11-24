@@ -9,14 +9,24 @@
         Width="1500"
         Title="LaTeX Magic">
 
-    <Grid Background="BurlyWood">
+    <Grid Background="Salmon">
         <InkCanvas x:Name="ink" HorizontalAlignment="Center" Margin="0,104,0,592.5" Width="860"/>
         <Image x:Name="imageProcess" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,104,0,592.5" Width="860"/>
-        <Image x:Name="imageLatex" HorizontalAlignment="Center" Margin="0,463,0,233.5" Source="latex_default.png"></Image>
+        <Image x:Name="imageLatex" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,434,0,262.5" Source="latex_default.png"></Image>
         <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Center" Margin="0,802,500,0" VerticalAlignment="Top" Width="338" Height="103"/>
         <Button x:Name="btnPredict" Content="Predict" HorizontalAlignment="Center" Margin="500,802,0,0" VerticalAlignment="Top" Width="338" Height="103"/>
         <Button x:Name="btnReset" Visibility="Collapsed" Content="One more time!" HorizontalAlignment="Center" Margin="500,802,0,0" VerticalAlignment="Top" Width="338" Height="103"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Center" Height="22" Margin="0,940,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Center" Height="22" Margin="0,844,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
+        <Image x:Name="image1" HorizontalAlignment="Left" Height="100" Margin="129,100,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image2" HorizontalAlignment="Left" Height="90" Margin="129,200,0,0" VerticalAlignment="Top" Width="90"/>
+        <Image x:Name="image3" HorizontalAlignment="Left" Height="100" Margin="129,300,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image4" HorizontalAlignment="Left" Height="100" Margin="129,400,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image5" HorizontalAlignment="Left" Height="100" Margin="129,500,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image6" HorizontalAlignment="Left" Height="100" Margin="129,600,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image7" HorizontalAlignment="Left" Height="100" Margin="129,700,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image8" HorizontalAlignment="Left" Height="100" Margin="129,800,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image9" HorizontalAlignment="Left" Height="100" Margin="129,900,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="image10" HorizontalAlignment="Left" Height="100" Margin="129,900,0,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 
 </Window>

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
+using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 
 namespace LatexDemo
@@ -21,11 +22,11 @@ namespace LatexDemo
             btnSave.Click += btnSaveClick;
         }
 
-        private string runPredictScript(string scriptfn, string clffn, string ftfn, string pythonfn, string imagefn)
+        private string runPredictScript(string imagefn, int version, int predict_count)
         {
             var process = new Process();
-            process.StartInfo.FileName = pythonfn;
-            process.StartInfo.Arguments = scriptfn + " " + imagefn + " " + clffn + " " + ftfn;
+            process.StartInfo.FileName = PYTHON_FN;
+            process.StartInfo.Arguments = PREDICTSCRIPT_FN + " " + imagefn + " " + version + " " + predict_count;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
@@ -44,8 +45,6 @@ namespace LatexDemo
         private static string BATCH_FN = ROOT_DIR + "batch.bat";
         private static string LATEXIMAGE_FN = ROOT_DIR + "output.png";
         private static string PREDICTSCRIPT_FN = "C:\\Users\\mmnor\\Projects\\autolatex\\predict.py";
-        private static string CLF_FN = "C:/Users/mmnor/Projects/autolatex/MLPCustom2.p";
-        private static string FT_FN = "C:/Users/mmnor/Projects/autolatex/PCACustom2.p";
         private static string PYTHON_FN = "C:\\Anaconda3\\python.exe";
         private static string PICTURE_FN = "C:\\Users\\mmnor\\Projects\\LatexDemo\\LatexDemo\\output";
 
@@ -104,7 +103,7 @@ namespace LatexDemo
         private static string LATEX_PRE = "\\documentclass[preview,border=12pt]{standalone}\n\\usepackage{amsmath}\n\\usepackage{tikz}\n\\begin{document}\n$";
         private static string LATEX_POST = "$\n\\end{document}";
 
-        private void btnResetClick(object sender, RoutedEventArgs e)
+        private void reset()
         {
             ink.Strokes.Clear();
             imageLatex.Visibility = Visibility.Collapsed;
@@ -114,42 +113,54 @@ namespace LatexDemo
             btnPredict.Visibility = Visibility.Visible;
         }
 
-        private int SAVE_COUNT = 0;
+        private void btnResetClick(object sender, RoutedEventArgs e)
+        {
+            reset();
+        }
+
+        private int SAVE_COUNT = 700;
         private int PREDICT_COUNT = 0;
 
         private void btnSaveClick(object sender, RoutedEventArgs e)
         {
             string symbol = textBox.Text;
-            string dir = @"C:\Users\mmnor\Projects\autolatex\data\MYDATA\overall\";
+            string dir = @"C:\Users\mmnor\Projects\autolatex\data\MYDATA\train\";
             string fileName = dir + SAVE_COUNT + "_" + symbol + ".png";
             saveCanvas(fileName);
             SAVE_COUNT += 1;
-            ink.Strokes.Clear();
+            reset();
         }
 
         private void btnPredictClick(object sender, RoutedEventArgs e)
         {
             btnPredict.Visibility = Visibility.Collapsed;
             saveCanvas(DOODLE_FN);
-            ink.Visibility = Visibility.Collapsed;
+            //ink.Visibility = Visibility.Collapsed;
 
-            string scriptoutput = runPredictScript(PREDICTSCRIPT_FN, CLF_FN, FT_FN, PYTHON_FN, DOODLE_FN);
+            string scriptoutput = runPredictScript(DOODLE_FN, 3, PREDICT_COUNT);
             string latex = "default";
             string symbolsImageFn = "default";
+            int numSymbols = -1;
             using (var reader = new StringReader(scriptoutput))
             {
                 latex = reader.ReadLine();
                 symbolsImageFn = reader.ReadLine();
+                numSymbols = Int32.Parse(reader.ReadLine());
+                var symbolImgFileNames = new List<string>();
+                for(int i = 0; i < numSymbols; i++)
+                {
+                    string symbolImgFn = reader.ReadLine();
+                    symbolImgFileNames.Add(symbolsImageFn);
+                }
             }
 
-            textBox.Text = latex;
             string latexDocument = LATEX_PRE + latex + LATEX_POST;
             displayLatex(LATEX_FN, BATCH_FN, latexDocument);
 
             var processedOutputImage = new BitmapImage(new Uri(symbolsImageFn, UriKind.Absolute));
             imageProcess.Source = processedOutputImage;
 
-            imageProcess.Visibility = Visibility.Visible;
+            //imageProcess.Visibility = Visibility.Visible;
             imageLatex.Visibility = Visibility.Visible;
             btnReset.Visibility = Visibility.Visible;
 
