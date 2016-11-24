@@ -13,6 +13,9 @@ namespace LatexDemo
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        List<System.Windows.Controls.Image> SymbolImages = new List<System.Windows.Controls.Image>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -20,6 +23,16 @@ namespace LatexDemo
             btnPredict.Click += btnPredictClick;
             btnReset.Click += btnResetClick;
             btnSave.Click += btnSaveClick;
+            SymbolImages.Add(image1);
+            SymbolImages.Add(image2);
+            SymbolImages.Add(image3);
+            SymbolImages.Add(image4);
+            SymbolImages.Add(image5);
+            SymbolImages.Add(image6);
+            SymbolImages.Add(image7);
+            SymbolImages.Add(image8);
+            SymbolImages.Add(image9);
+            SymbolImages.Add(image10);
         }
 
         private string runPredictScript(string imagefn, int version, int predict_count)
@@ -141,17 +154,24 @@ namespace LatexDemo
             string latex = "default";
             string symbolsImageFn = "default";
             int numSymbols = -1;
+            var symbolImgFileNames = new List<string>();
             using (var reader = new StringReader(scriptoutput))
             {
                 latex = reader.ReadLine();
                 symbolsImageFn = reader.ReadLine();
                 numSymbols = Int32.Parse(reader.ReadLine());
-                var symbolImgFileNames = new List<string>();
                 for(int i = 0; i < numSymbols; i++)
                 {
                     string symbolImgFn = reader.ReadLine();
                     symbolImgFileNames.Add(symbolsImageFn);
                 }
+            }
+
+            for(int i=0;i<(symbolsImageFn.Length) && i < 10; i++)
+            {
+                string fnImage = symbolImgFileNames[i];
+                var imageSymbol = new BitmapImage(new Uri(fnImage, UriKind.Absolute));
+                SymbolImages[i].Source = imageSymbol;
             }
 
             string latexDocument = LATEX_PRE + latex + LATEX_POST;
