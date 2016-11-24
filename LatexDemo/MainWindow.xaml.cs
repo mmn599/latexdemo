@@ -135,13 +135,15 @@ namespace LatexDemo
             reset();
         }
 
+        int CURRENT_VERSION = 1;
+
         private void btnPredictClick(object sender, RoutedEventArgs e)
         {
             btnPredict.Visibility = Visibility.Collapsed;
             saveCanvas(DOODLE_FN);
             //ink.Visibility = Visibility.Collapsed;
 
-            string scriptoutput = runPredictScript(DOODLE_FN, 3, PREDICT_COUNT);
+            string scriptoutput = runPredictScript(DOODLE_FN, CURRENT_VERSION, PREDICT_COUNT);
             string latex = "default";
             string labelsImageFn = "default";
             int numSymbols = -1;
