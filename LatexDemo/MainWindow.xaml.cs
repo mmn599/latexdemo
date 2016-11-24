@@ -49,7 +49,7 @@ namespace LatexDemo
         private static string LATEXIMAGE_FN = ROOT_DIR + "output.png";
         private static string PREDICTSCRIPT_FN = "C:\\Users\\mmnor\\Projects\\autolatex\\predict.py";
         private static string PYTHON_FN = "C:\\Anaconda3\\python.exe";
-        private static string PICTURE_FN = "C:\\Users\\mmnor\\Projects\\LatexDemo\\LatexDemo\\output";
+        private static string PICTURE_FN = "C:\\Users\\mmnor\\Projects\\LatexDemo\\LatexDemo\\temp\\output";
 
         private void displayLatex(string text)
         {
