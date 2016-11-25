@@ -23,11 +23,11 @@ namespace LatexDemo
             btnSave.Click += btnSaveClick;
         }
 
-        private string runPredictScript(string imagefn, int version, int predict_count)
+        private string runPredictScript(string imagefn, int predict_count)
         {
             var process = new Process();
             process.StartInfo.FileName = PYTHON_FN;
-            process.StartInfo.Arguments = PREDICTSCRIPT_FN + " " + imagefn + " " + version + " " + predict_count;
+            process.StartInfo.Arguments = PREDICTSCRIPT_FN + " " + imagefn + " " + predict_count;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
@@ -135,15 +135,13 @@ namespace LatexDemo
             reset();
         }
 
-        int CURRENT_VERSION = 2;
-
         private void btnPredictClick(object sender, RoutedEventArgs e)
         {
             btnPredict.Visibility = Visibility.Collapsed;
             saveCanvas(DOODLE_FN);
             //ink.Visibility = Visibility.Collapsed;
 
-            string scriptoutput = runPredictScript(DOODLE_FN, CURRENT_VERSION, PREDICT_COUNT);
+            string scriptoutput = runPredictScript(DOODLE_FN, PREDICT_COUNT);
             string latex = "default";
             string labelsImageFn = "default";
             int numSymbols = -1;
