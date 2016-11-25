@@ -109,7 +109,7 @@ namespace LatexDemo
 
         private void reset()
         {
-            //ink.Strokes.Clear();
+            ink.Strokes.Clear();
             imageLatex.Visibility = Visibility.Collapsed;
             imageProcess.Visibility = Visibility.Collapsed;
             btnReset.Visibility = Visibility.Collapsed;
