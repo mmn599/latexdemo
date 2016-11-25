@@ -109,7 +109,7 @@ namespace LatexDemo
 
         private void reset()
         {
-            ink.Strokes.Clear();
+            //ink.Strokes.Clear();
             imageLatex.Visibility = Visibility.Collapsed;
             imageProcess.Visibility = Visibility.Collapsed;
             btnReset.Visibility = Visibility.Collapsed;
@@ -122,12 +122,12 @@ namespace LatexDemo
             reset();
         }
 
-        private int SAVE_COUNT = 700;
+        private int SAVE_COUNT = 1000;
         private int PREDICT_COUNT = 0;
 
         private void btnSaveClick(object sender, RoutedEventArgs e)
         {
-            string symbol = textBox.Text;
+            string symbol = textTrue.Text;
             string dir = @"C:\Users\mmnor\Projects\autolatex\data\MYDATA\train\";
             string fileName = dir + SAVE_COUNT + "_" + symbol + ".png";
             saveCanvas(fileName);
@@ -135,7 +135,7 @@ namespace LatexDemo
             reset();
         }
 
-        int CURRENT_VERSION = 1;
+        int CURRENT_VERSION = 2;
 
         private void btnPredictClick(object sender, RoutedEventArgs e)
         {
@@ -160,6 +160,8 @@ namespace LatexDemo
                 }
             }
 
+            textPred.Text = latex;
+
             listSymbolImages.Items.Clear();
             foreach(var symbolImgFileName in symbolImgFileNames)
             {
@@ -168,6 +170,7 @@ namespace LatexDemo
                 listSymbolImages.Items.Add(magicImage);
             }
 
+            /*
             string latexDocument = LATEX_PRE + latex + LATEX_POST;
             displayLatex(latexDocument);
 
@@ -176,6 +179,8 @@ namespace LatexDemo
 
             //imageProcess.Visibility = Visibility.Visible;
             imageLatex.Visibility = Visibility.Visible;
+            */
+
             btnReset.Visibility = Visibility.Visible;
 
             PREDICT_COUNT += 1;

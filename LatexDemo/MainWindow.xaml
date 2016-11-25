@@ -16,7 +16,8 @@
         <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Center" Margin="0,802,500,0" VerticalAlignment="Top" Width="338" Height="103"/>
         <Button x:Name="btnPredict" Content="Predict" HorizontalAlignment="Center" Margin="500,802,0,0" VerticalAlignment="Top" Width="338" Height="103"/>
         <Button x:Name="btnReset" Visibility="Collapsed" Content="One more time!" HorizontalAlignment="Center" Margin="500,802,0,0" VerticalAlignment="Top" Width="338" Height="103"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Center" Height="22" Margin="0,844,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textTrue" HorizontalAlignment="Center" Height="22" Margin="0,844,0,0" TextWrapping="Wrap" Text="true" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textPred" HorizontalAlignment="Center" Height="22" Margin="0,900,0,0" TextWrapping="Wrap" Text="pred" VerticalAlignment="Top" Width="120"/>
         <ListBox x:Name="listSymbolImages" Background="Salmon" Width="100" HorizontalAlignment="Left" Margin="0,0,0,0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
