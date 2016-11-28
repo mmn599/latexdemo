@@ -13,23 +13,28 @@
         Title="LaTeX Magic">
 
     <Grid Background="#42a1f4">
-        <InkCanvas x:Name="ink" HorizontalAlignment="Center" Margin="0,0,0,657.5" Width="1595"></InkCanvas>
-        <Image x:Name="imageProcess" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,104,0,592.5" Width="860"/>
-        <Image x:Name="imageLatex" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,434,0,262.5" Source="latex_default.png"></Image>
-        <Button x:Name="btnSave" Visibility="Collapsed" Background="AliceBlue" Content="Save" HorizontalAlignment="Center" Margin="574,505,583,0" VerticalAlignment="Top" Width="338" Height="103"/>
-        <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" x:Name="btnPredict" Background="Azure" Content="Predict" HorizontalAlignment="Center" Margin="574,654,583,0" VerticalAlignment="Top" Width="338" Height="103"/>
-        <Button x:Name="btnReset" Visibility="Collapsed" Content="One more time!" HorizontalAlignment="Center" Margin="500,802,0,0" VerticalAlignment="Top" Width="338" Height="103"/>
-        <TextBox Visibility="Collapsed" x:Name="textTrue" HorizontalAlignment="Center" Height="22" Margin="0,844,0,0" TextWrapping="Wrap" Text="true" VerticalAlignment="Top" Width="120"/>
-        <TextBox Visibility="Collapsed" x:Name="textPred" HorizontalAlignment="Center" Height="22" Margin="0,900,0,0" TextWrapping="Wrap" Text="pred" VerticalAlignment="Top" Width="120"/>
-        <ListBox x:Name="listSymbolImages" Visibility="Collapsed" Background="Salmon" Width="100" HorizontalAlignment="Left" Margin="0,0,0,0">
+        <InkCanvas x:Name="ink" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" Height="300" Width="1595"></InkCanvas>
+        <Image x:Name="imageLatex" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Top" Height="300" Margin="0,300,0,0" Width="500"></Image>
+        <ListBox x:Name="listSymbolImages" Background="Transparent" BorderThickness="0" Height="200" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,475,0,0">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Image Margin="10,10,10,10" Source="{Binding Path}"/>
+                        <Image Margin="10,10,10,10" Height="100" Width="100" Source="{Binding Path}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Image x:Name="imageProcess" HorizontalAlignment="Center" Margin="0,700,0,106.5" Height="200" Width="500"/>
+        <Button x:Name="btnSave" Visibility="Collapsed" Background="AliceBlue" Content="Save" HorizontalAlignment="Center" Margin="574,505,583,0" VerticalAlignment="Top" Width="338" Height="103"/>
+        <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" x:Name="btnPredict" Background="Azure" Content="Predict" HorizontalAlignment="Center" Margin="0,825,0,0" VerticalAlignment="Top" Width="338" Height="103"/>
+        <Button BorderThickness="0" Visibility="Collapsed" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" x:Name="btnReset" Background="Azure" Content="One more time!" HorizontalAlignment="Center" Margin="0,825,0,0" VerticalAlignment="Top" Width="338" Height="103"/>
+        <TextBox Visibility="Collapsed" x:Name="textTrue" HorizontalAlignment="Center" Height="22" Margin="0,844,0,0" TextWrapping="Wrap" Text="true" VerticalAlignment="Top" Width="120"/>
+        <TextBox Visibility="Collapsed" x:Name="textPred" HorizontalAlignment="Center" Height="22" Margin="0,900,0,0" TextWrapping="Wrap" Text="pred" VerticalAlignment="Top" Width="120"/>
     </Grid>
 
 </Window>

@@ -109,11 +109,11 @@ namespace LatexDemo
 
         private void reset()
         {
-            ink.Strokes.Clear();
+            listSymbolImages.Visibility = Visibility.Collapsed;
             imageLatex.Visibility = Visibility.Collapsed;
             imageProcess.Visibility = Visibility.Collapsed;
-            btnReset.Visibility = Visibility.Collapsed;
             ink.Visibility = Visibility.Visible;
+            btnReset.Visibility = Visibility.Collapsed;
             btnPredict.Visibility = Visibility.Visible;
         }
 
@@ -168,18 +168,17 @@ namespace LatexDemo
                 listSymbolImages.Items.Add(magicImage);
             }
 
-            /*
             string latexDocument = LATEX_PRE + latex + LATEX_POST;
             displayLatex(latexDocument);
 
             var processedOutputImage = new BitmapImage(new Uri(labelsImageFn, UriKind.Absolute));
             imageProcess.Source = processedOutputImage;
 
-            //imageProcess.Visibility = Visibility.Visible;
+            listSymbolImages.Visibility = Visibility.Visible;
             imageLatex.Visibility = Visibility.Visible;
-            */
-
+            imageProcess.Visibility = Visibility.Visible;
             btnReset.Visibility = Visibility.Visible;
+            btnPredict.Visibility = Visibility.Collapsed;
 
             PREDICT_COUNT += 1;
         }
