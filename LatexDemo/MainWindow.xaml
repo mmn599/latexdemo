@@ -14,8 +14,8 @@
 
     <Grid Background="#42a1f4">
         <InkCanvas x:Name="ink" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" Height="300" Width="1595"></InkCanvas>
-        <Image x:Name="imageLatex" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Top" Height="300" Margin="0,300,0,0" Width="500"></Image>
-        <ListBox x:Name="listSymbolImages" Background="Transparent" BorderThickness="0" Height="200" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,475,0,0">
+        <Image x:Name="imageLatex" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Top" Height="400" Margin="0,300,0,0" Width="600"></Image>
+        <ListBox x:Name="listSymbolImages" Background="Transparent" BorderThickness="0" Height="200" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,525,0,0">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"/>
@@ -24,7 +24,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Image Margin="10,10,10,10" Height="100" Width="100" Source="{Binding Path}"/>
+                        <Image Margin="10,10,10,10" Source="{Binding Path}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
